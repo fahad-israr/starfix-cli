@@ -32,7 +32,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 @CommandLine.Command(mixinStandardHelpOptions = true)
-public class Starfix {
+public class Starfix implements Runnable{
+    
 
     @Command
     public int config() throws Exception {
@@ -50,6 +51,7 @@ public class Starfix {
 
         // URL Validation to check a valid git repository
         if (!validate_url(url)) { // Incase URI doesn't macth our scheme we'll terminate
+            System.out.println(url);
             throw new IllegalArgumentException("Not a valid URI for git repository");
         }
 
@@ -118,8 +120,10 @@ public class Starfix {
         return ExitCode.OK;
     }
     
-    @CommandLine.Parameters()
-    URI uri;
+    @CommandLine.Parameters(arity = "0..1")
+    String uri;
+
+    @Override
     public void run() {
         System.out.println(uri);
     }
