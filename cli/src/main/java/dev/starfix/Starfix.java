@@ -120,12 +120,12 @@ public class Starfix implements Runnable{
         return ExitCode.OK;
     }
     
-    @CommandLine.Parameters(arity = "0..1")
+    @Parameters(arity = "0..1")
     String uri;
 
     @Override
     public void run() {
-        System.out.println(uri);
+        cloneCmd(uri);
     }
 
     // Function to validate URL using with Regex
